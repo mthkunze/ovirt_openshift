@@ -157,6 +157,9 @@ vms:
       host_name: "openshift-lb.{{ public_hosted_zone }}"
       authorized_ssh_keys: "{{ root_ssh_key }}"
       custom_script: "{{ install_guest_agent_script }}"
+      nic_boot_protocol: dhcp
+      nic_name: eth0
+      nic_on_boot: true
 
 affinity_groups:
   - name: masters_ag
