@@ -1,7 +1,7 @@
 # prep_oshift_nodes
 yum update -y
 yum install -y centos-release-openshift-origin
-yum install -y wget git net-tools bind-utils iptables-services bridge-utils ntp docker
+yum install -y wget git net-tools bind-utils iptables-services bridge-utils ntp docker atomic-openshift-utils
 
 useradd origin
 passwd origin
