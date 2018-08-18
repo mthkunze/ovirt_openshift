@@ -1,0 +1,24 @@
+# prep_oshift_nodes
+yum update -y
+yum install -y centos-release-openshift-origin
+yum install -y wget git net-tools bind-utils iptables-services bridge-utils ntp docker
+
+useradd origin
+passwd origin
+echo -e 'Defaults:origin !requiretty\norigin ALL = (root) NOPASSWD:ALL' | tee /etc/sudoers.d/openshift
+chmod 440 /etc/sudoers.d/openshift
+
+cfdisk /dev/vdb
+
+vgcreate origin /dev/vdb1
+echo VG=origin >> /etc/sysconfig/docker-storage-setup
+
+systemctl enable docker
+systemctl start docker
+
+
+
+for host in `cat shiftnodes` ; do while read line; do ssh $host ; done < prep_oshift_nodes ; done
+
+
+openshift_deployment_type=origin sudo ansible-playbook -i /etc/ansible/hosts playbooks/prerequisites.yml
