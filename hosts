@@ -1,0 +1,42 @@
+[OSEv3:children]
+nodes
+masters
+etcd
+#lb
+
+[OSEv3:vars]
+openshift_deployment_type=origin
+openshift_enable_docker_excluder=False
+
+# SSH user, this user should allow ssh based auth without requiring a password
+ansible_ssh_user=root
+
+# If ansible_ssh_user is not root, ansible_become must be set to true
+#ansible_become=true
+
+[masters]
+openshift-master-0.fritz.box
+#openshift-master-1.fritz.box
+
+[etcd]
+openshift-master-0.fritz.box
+
+[infras]
+openshift-infra-0.fritz.box
+#openshift-infra-1.fritz.box
+
+#[lb]
+#openshift-lb.fritz.box
+
+[nodes]
+#openshift-master-0.fritz.box openshift_node_labels="{'region': 'master'}"
+#openshift_hostname=openshift-master-0.fritz.box
+#openshift-infra-0.fritz.box openshift_node_labels="{'region': 'infra'}"
+#openshift_hostname=openshift-infra-0.fritz.box
+#openshift-node-0.fritz.box openshift_node_labels="{'region': 'primary'}"
+#openshift_hostname=openshift-node-0.fritz.box
+
+openshift-master-0.fritz.box openshift_node_group_name="node-config-master"
+openshift-infra-0.fritz.box openshift_node_group_name="node-config-infra"
+openshift-node-0.fritz.box openshift_node_group_name="node-config-compute"
+#openshift-lb.fritz.box
