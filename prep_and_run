@@ -1,4 +1,5 @@
 # prep_oshift_nodes
+cd /etc/yum.repos.d && curl -O https://storage.googleapis.com/origin-ci-test/releases/openshift/origin/master/origin.repo
 yum update -y
 yum install -y centos-release-openshift-origin
 yum install -y wget git net-tools bind-utils iptables-services bridge-utils ntp docker atomic-openshift-utils
