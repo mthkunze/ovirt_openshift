@@ -5,6 +5,10 @@ etcd
 #lb
 
 [OSEv3:vars]
+openshift_release=v3.7.1
+openshift_pkg_version=3.7.1
+openshift_image_tag=v3.7.1
+
 openshift_deployment_type=origin
 openshift_enable_docker_excluder=False
 
