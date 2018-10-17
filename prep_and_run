@@ -1,4 +1,6 @@
-# prep_oshift_nodes
+openshift_deployment_type=origin sudo ansible-playbook -i /etc/ansible/hosts playbooks/prerequisites.yml
+
+# prep_oshift_nodes manually
 #cd /etc/yum.repos.d && curl -O https://storage.googleapis.com/origin-ci-test/releases/openshift/origin/master/origin.repo
 yum update -y
 yum install -y centos-release-openshift-origin
@@ -19,8 +21,10 @@ systemctl enable docker
 systemctl start docker
 
 
-
 for host in `cat shiftnodes` ; do while read line; do ssh $host ; done < prep_oshift_nodes ; done
 
 
-openshift_deployment_type=origin sudo ansible-playbook -i /etc/ansible/hosts playbooks/prerequisites.yml
+
+# OC
+
+oc cluster up --skip-registry-check
